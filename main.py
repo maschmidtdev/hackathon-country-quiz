@@ -1,17 +1,19 @@
 import random
 from infobox import fetch_infobox_data
 
-
-countries = ["Deutschland", "Frankreich", "Spanien", "Italien", "Namibia"]
-
-
 info_difficulty = {
     "ignore": [
         "Errichtung",
         "Internet-TLD",
         "Vorgängergebilde",
         "ISO 3166",
-        "Nationalfeiertag"
+        "Nationalfeiertag",
+        "Unabhängigkeit",
+        "Verfassung"
+    ],
+    "maybe": [
+        "National­hymne",
+        "Flagge"
     ],
     "schwer": [
         "Wahlsprache",
@@ -22,7 +24,11 @@ info_difficulty = {
         "Parlament(e)",
         "Bevölkerungs­entwicklung",
         "BruttoinlandsproduktTotal (nominal)Total (KKP)BIP/Einw. (nom.)BIP/Einw. (KKP)",
-        "Index der menschlichen Entwicklung(HDI)"
+        "Index der menschlichen Entwicklung(HDI)",
+        "Staatsform",
+        "Bruttoinlandsprodukt",
+        "Brutto­inlands­produkt pro Einwohner",
+        "Bevölkerungs­entwicklung"
     ],
     "mittel": [
         "Staatsoberhaupt",
@@ -49,6 +55,14 @@ difficulty_counts = {
     "mittel": 3,
     "leicht": 2
 }
+
+def get_countries() -> list:
+    countries = []
+    with open("countries.txt", "r", encoding="utf-8") as country_file:
+        for country in country_file.readlines():
+            countries.append(country.strip())
+
+    return countries
 
 
 def get_random_info(difficulty) -> str:
@@ -105,12 +119,8 @@ def get_difficulties() -> list:
 
 def print_missing_info(infobox_data, info_difficulty):
     missing = list(infobox_data.keys())
-
     for info in infobox_data:
         for key ,infolist in info_difficulty.items():
-            if key == "ignored":
-                continue
-
             if info in infolist:
                 missing.remove(info)
                 break
@@ -155,7 +165,7 @@ def game():
 
     # TODO: make function
     difficulties = get_difficulties()
-    country = random.choice(countries)
+    country = random.choice(get_countries())
     infobox_data.update(fetch_infobox_data(country))
 
     print_missing_info(infobox_data, info_difficulty)
