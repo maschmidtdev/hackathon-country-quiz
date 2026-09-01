@@ -37,18 +37,12 @@ def get_info_box(country):
 
 
 def get_random_info(difficulty) -> str:
-    # TODO: leere liste abfangen
-    print(info_difficulty)
-
     if len(info_difficulty[difficulty]) == 0:
         return ""
 
     info = random.choice(info_difficulty[difficulty])
-    print("Suche nach info: ", info)
     info_difficulty[difficulty].remove(info)
 
-
-    print("infobox_data: ", infobox_data)
     if info in infobox_data:
         return f"{info}: {infobox_data[info]}"
     else:
@@ -57,6 +51,11 @@ def get_random_info(difficulty) -> str:
 
 def get_country_from_user() -> str:
     guess = input("Auf welches Land tippst du?: ")
+
+    if not guess:
+        print("Eingabe ungültig, erneute Eingabe:")
+        return get_country_from_user()
+
     return guess
 
 
@@ -67,6 +66,7 @@ def play_game(difficulties, country) -> int:
         random_info = (get_random_info(difficulty))
 
         if not random_info:
+            score -= 1
             continue
 
         print(random_info)
@@ -102,8 +102,6 @@ def game():
 
     # TODO: make function
     difficulties = get_difficulties()
-    print(difficulties)
-
     country = random.choice(countries)
     infobox_data.update(fetch_infobox_data(country))
 
@@ -111,11 +109,9 @@ def game():
     score = play_game(difficulties, country)
 
     if score > 0:
-        # win
-        pass
+        print("Win! Score:", score)
     else:
-        # lose
-        pass
+        print("Game over! Das gesuchte Land war:", country)
 
 
 if __name__ == "__main__":
