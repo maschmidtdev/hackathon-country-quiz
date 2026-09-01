@@ -122,7 +122,6 @@ def game():
     #       - Falsch geraten, evtl. schwierigkeit anpassen, nächster Hinweis
     #       - nach X versuchen spiel verloren, menü ?
 
-    # TODO: make function
     difficulties = get_difficulties()
     country = random.choice(get_countries())
     infobox_data.update(fetch_infobox_data(country))
@@ -136,8 +135,6 @@ def game():
         print("Win! Score:", score)
     else:
         print("Game over! Das gesuchte Land war:", country)
-    
-
 
 
 def main():
