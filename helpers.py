@@ -18,7 +18,7 @@ def get_countries() -> list:
   countries = []
   with open("countries.txt", "r", encoding="utf-8") as country_file:
     for country in country_file.readlines():
-      countries.append(country.strip())
+      countries.append(country.strip().lower())
 
   return countries
 
@@ -32,7 +32,7 @@ def get_random_info(difficulty, infobox_data) -> str:
 
   if info in infobox_data:
     print(f"{BRIGHT_WHITE} - - - Nächster Hinweis: {BOLD+BRIGHT_GREEN}{info}{RESET} - - -")
-    return f"\t {BRIGHT_GREEN}-> {infobox_data[info]}{RESET}"
+    return f"\t {BRIGHT_GREEN}-> {infobox_data[info]}{RESET}\n"
   else:
     return get_random_info(difficulty, infobox_data)
 
@@ -40,8 +40,8 @@ def get_random_info(difficulty, infobox_data) -> str:
 def get_country_from_user() -> str:
   guess = input(f"{BRIGHT_WHITE}Auf welches Land tippst du?: {RESET}")
 
-  if not guess.isalpha():
-    print(f"{BRIGHT_YELLOW+BOLD}Ungültige Eingabe: Bitte nur Buchstaben verwenden:{RESET}")
+  if guess.lower() not in get_countries():
+    print(f"{BRIGHT_YELLOW+BOLD}Kein gültiges Land, erneute Eingabe::{RESET}")
     return get_country_from_user()
 
   return guess

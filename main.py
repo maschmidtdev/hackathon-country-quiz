@@ -19,7 +19,7 @@ def play_game(difficulties, country, infobox_data) -> int:
         if country.lower() == guess.lower():
             return score
         else:
-            print(f"{BRIGHT_CYAN}{guess}{BRIGHT_MAGENTA} war leider falsch!{RESET}")
+            print(f"{BRIGHT_CYAN}{guess.capitalize()}{BRIGHT_MAGENTA} war leider falsch!{RESET}")
             score -= 1
             distance = get_distance(get_coordinates(country), get_coordinates(guess))
             print(f"{BRIGHT_WHITE}Die Hauptstadt deines Tipps liegt ca. {BRIGHT_CYAN}{int(distance)}{BRIGHT_WHITE} km von der Haupstadt des gesuchten Landes entfernt.{RESET}\n")
@@ -44,15 +44,15 @@ def function_menu_choice(input_user_choice_menu):
 
 def game():
     difficulties = get_difficulties()
-    country = random.choice(get_countries())
+    country = str(random.choice(get_countries()))
     infobox_data = get_infobox_data(country)
 
     score = play_game(difficulties, country, infobox_data)
 
     if score > 0:
-        print(f"{BOLD+BRIGHT_GREEN}Du hast gewonnen!{RESET}{BRIGHT_WHITE} Dein Score: {BRIGHT_CYAN}{score}{RESET}")
+        print(f"{BOLD+BRIGHT_GREEN}Du hast gewonnen!{RESET}{BRIGHT_WHITE} Dein Score: {BRIGHT_CYAN}{score}{RESET}\n")
     else:
-        print(f"{BOLD+BRIGHT_RED}Game over!{RESET}{BRIGHT_WHITE} Das gesuchte Land war: {BRIGHT_CYAN}{country}{RESET}")
+        print(f"{BOLD+BRIGHT_RED}Game over!{RESET}{BRIGHT_WHITE} Das gesuchte Land war: {BRIGHT_CYAN}{country.capitalize()}{RESET}\n")
 
 
 def main():
