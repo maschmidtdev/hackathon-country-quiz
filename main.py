@@ -1,5 +1,5 @@
+
 import random
-import json
 from helpers import get_random_info, get_countries, get_country_from_user, get_difficulties, get_infobox_data
 
 
@@ -23,27 +23,23 @@ def play_game(difficulties, country, infobox_data) -> int:
 
     return score
 
-
 def function_menu_choice(input_user_choice_menu):
     if input_user_choice_menu == 1:
-        with open(game_introduction.txt, "r", encoding="utf-8") as file:
-            text = file.read()
-        print(text)
-    elif input_user_choice_menu == 2:
-        if input_user_choice_menu == A:
-            pass
-            # Funktionsaufruf für Start des Spiels
-        elif input_user_choice_menu == B:
-            with open(game_instructions.txt, "r", encoding="utf-8") as file:
-                text_output = file.read()
-            print(text_output)
-        elif input_user_choice_menu == C:
-            pass
-            # Spielmodi (TBC)
-        elif input_user_choice_menu == C:
-            pass
-            # Aufruf Funktion zum Beenden des Spiels
+        with open("game_instructions.txt", "r", encoding="utf-8") as file:
+            text_output = file.read()
+        print(text_output)
 
+    elif input_user_choice_menu == 2:
+        game()
+        # Aufruf Funktion game() für Start des Spiels
+
+    elif input_user_choice_menu == 3:
+        pass
+        # Spielmodi (TBC)
+
+    elif input_user_choice_menu == 4:
+        pass
+        # print("Das Spiel wird beendet.")
 
 def game():
     difficulties = get_difficulties()
@@ -60,20 +56,36 @@ def game():
 
 def main():
     print("""
-    1) Einführung zum Spiel
-    2) Wähle folgende Option:
-        A. Neues Spiel
-        B. Spielregeln
-        C. Spielmodi (TBC)
-        D. Spiel beenden
-    """)
-
-    # Punkt 2) C. mögliche Ergänzung:
+1) Spielregeln
+2) Spielbeginn
+3) Spielmodi (TBC)
+4) Spiel beenden
+""")
+# Punkt 2) C. mögliche Menü - Ergänzung:
     # Woher kommst du?
     # Möchtest du das Spiel nur innerhalb eines Kontinentes spielen?
     # Highscore Liste
 
-    game()
-    
+    while True:
+        try:
+            enter_number_menu = int(input(
+                "Bitte geben Sie eine Zahl für den gewünschten Menüpunkt ein: "
+                ))
+
+            if enter_number_menu < 1 or enter_number_menu > 4:
+                print("Ungültige Eingabe. Bitte geben Sie eine Zahl von 1 bis 4 ein.")
+                continue
+
+            function_menu_choice(enter_number_menu)
+
+            if enter_number_menu == 4:
+                break
+
+        except ValueError:
+            print("Ungültige Eingabe. Bitte geben Sie eine Zahl von 1 bis 4 ein.")
+
+
 if __name__ == '__main__':
     main()
+
+
