@@ -1,54 +1,13 @@
 import random
+import json
 from infobox import fetch_infobox_data
 
-info_difficulty = {
-    "ignore": [
-        "Errichtung",
-        "Internet-TLD",
-        "Vorgängergebilde",
-        "ISO 3166",
-        "Nationalfeiertag",
-        "Unabhängigkeit",
-        "Verfassung"
-    ],
-    "maybe": [
-        "National­hymne",
-        "Flagge"
-    ],
-    "schwer": [
-        "Wahlsprache",
-        "Amtssprache",
-        "Telefonvorwahl",
-        "Staats- und Regierungsform",
-        "Bevölkerungsdichte",
-        "Parlament(e)",
-        "Bevölkerungs­entwicklung",
-        "BruttoinlandsproduktTotal (nominal)Total (KKP)BIP/Einw. (nom.)BIP/Einw. (KKP)",
-        "Index der menschlichen Entwicklung(HDI)",
-        "Staatsform",
-        "Bruttoinlandsprodukt",
-        "Brutto­inlands­produkt pro Einwohner",
-        "Bevölkerungs­entwicklung"
-    ],
-    "mittel": [
-        "Staatsoberhaupt",
-        "Staatsreligion",
-        "Fläche",
-        "Regierungschef",
-        "Regierung",
-        "Einwohnerzahl",
-        "Währung"
-    ],
-    "leicht": [
-        "Zeitzone",
-        "Kfz-Kennzeichen",
-        "Hauptstadt",
-        "Nationalhymne"
-    ]
-}
+
+with open("info_difficulties.json", "r") as info_file:
+    info_difficulties = json.loads(info_file.read())
+    print(info_difficulties)
 
 infobox_data = {}
-
 
 difficulty_counts = {
     "schwer": 2,
@@ -66,11 +25,11 @@ def get_countries() -> list:
 
 
 def get_random_info(difficulty) -> str:
-    if len(info_difficulty[difficulty]) == 0:
+    if len(info_difficulties[difficulty]) == 0:
         return ""
 
-    info = random.choice(info_difficulty[difficulty])
-    info_difficulty[difficulty].remove(info)
+    info = random.choice(info_difficulties[difficulty])
+    info_difficulties[difficulty].remove(info)
 
     if info in infobox_data:
         return f"{info}: {infobox_data[info]}"
@@ -168,7 +127,7 @@ def game():
     country = random.choice(get_countries())
     infobox_data.update(fetch_infobox_data(country))
 
-    print_missing_info(infobox_data, info_difficulty)
+    print_missing_info(infobox_data, info_difficulties)
 
     # Loop
     score = play_game(difficulties, country)
