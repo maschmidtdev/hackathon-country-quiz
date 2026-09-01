@@ -1,5 +1,5 @@
-
 import random
+from text_formatting import *
 from helpers import get_random_info, get_countries, get_country_from_user, get_difficulties, get_infobox_data
 
 
@@ -73,7 +73,7 @@ def main():
                 ))
 
             if enter_number_menu < 1 or enter_number_menu > 4:
-                print("Ungültige Eingabe. Bitte geben Sie eine Zahl von 1 bis 4 ein.")
+                print(f"{BRIGHT_YELLOW+BOLD}Ungültige Eingabe. Bitte geben Sie eine Zahl von 1 bis 4 ein.{RESET}")
                 continue
 
             function_menu_choice(enter_number_menu)
@@ -82,7 +82,7 @@ def main():
                 break
 
         except ValueError:
-            print("Ungültige Eingabe. Bitte geben Sie eine Zahl von 1 bis 4 ein.")
+            print(f"{BRIGHT_YELLOW+BOLD}Ungültige Eingabe. Bitte geben Sie eine Zahl von 1 bis 4 ein.{RESET}")
 
 
 if __name__ == '__main__':

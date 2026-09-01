@@ -1,7 +1,7 @@
 import random
 from config import info_difficulties, difficulty_counts
 from infobox import fetch_infobox_data
-
+from text_formatting import *
 
 def get_infobox_data(country) -> dict:
   return fetch_infobox_data(country)
@@ -28,16 +28,16 @@ def get_random_info(difficulty, infobox_data) -> str:
   info_difficulties[difficulty].remove(info)
 
   if info in infobox_data:
-    return f"{info}: {infobox_data[info]}"
+    return f"{BOLD}{info}{RESET}: {infobox_data[info]}"
   else:
     return get_random_info(difficulty, infobox_data)
 
 
 def get_country_from_user() -> str:
-  guess = input("Auf welches Land tippst du?: ")
+  guess = input(f"{BRIGHT_WHITE}Auf welches Land tippst du?: {RESET}")
 
   if not guess:
-    print("Eingabe ungültig, erneute Eingabe:")
+    print(f"{BRIGHT_YELLOW+BOLD}Eingabe ungültig, erneute Eingabe:{RESET}")
     return get_country_from_user()
 
   return guess
@@ -59,9 +59,10 @@ def print_missing_info(info_data, info_difficulty):
                 missing.remove(info)
                 break
 
-    print("Missing infos")
+    print(f"{BOLD}Missing infos{RESET}")
     for info in missing:
         print("-", info)
+    print("\n")
 
 
 def main():
