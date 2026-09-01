@@ -2,6 +2,7 @@ import random
 
 import requests
 from bs4 import BeautifulSoup
+from infobox import fetch_infobox_data
 
 
 countries = ["Deutschland", "Frankreich", "Spanien", "Italien", "Namibia"]
@@ -13,9 +14,7 @@ info_difficulty = {
 }
 
 
-infobox_data = {
-    "Amtssprache": "Französisch"
-}
+infobox_data = {}
 
 
 difficulty_counts = {
@@ -24,7 +23,7 @@ difficulty_counts = {
     "leicht": 2
 }
 
-
+"""
 def get_info_box(country):
     url = f"https://de.wikipedia.org/wiki/{country}"
     response = requests.get(url, headers={"User-Agent": "Quiz"})
@@ -34,13 +33,22 @@ def get_info_box(country):
 
     for row in infobox.find_all("tr"):
         text = row.get_text(separator=": ", strip=True)
+"""
 
 
 def get_random_info(difficulty) -> str:
     # TODO: leere liste abfangen
+    print(info_difficulty)
+
+    if len(info_difficulty[difficulty]) == 0:
+        return ""
+
     info = random.choice(info_difficulty[difficulty])
+    print("Suche nach info: ", info)
     info_difficulty[difficulty].remove(info)
 
+
+    print("infobox_data: ", infobox_data)
     if info in infobox_data:
         return f"{info}: {infobox_data[info]}"
     else:
@@ -56,7 +64,12 @@ def play_game(difficulties, country) -> int:
     score = len(difficulties)
 
     for difficulty in difficulties:
-        print(get_random_info(difficulty))
+        random_info = (get_random_info(difficulty))
+
+        if not random_info:
+            continue
+
+        print(random_info)
         guess = get_country_from_user()
 
         if country.lower() == guess.lower():
@@ -92,8 +105,7 @@ def game():
     print(difficulties)
 
     country = random.choice(countries)
-    #info = get_info_box(country)
-    get_info_box(country)
+    infobox_data.update(fetch_infobox_data(country))
 
     # Loop
     score = play_game(difficulties, country)

@@ -1,7 +1,9 @@
 import requests
 from bs4 import BeautifulSoup
 
-def fetch_infobox_data(url):
+def fetch_infobox_data(country):
+    url = f"https://de.wikipedia.org/wiki/{country}"
+
     headers = {"User-Agent": "QuizApp/1.0 (contact@example.com)"}
     try:
         response = requests.get(url, headers=headers, timeout=5)
@@ -40,6 +42,9 @@ def fetch_infobox_data(url):
     print(f"--- FERTIG! {len(data)} Einträge extrahiert. ---\n")
     return data
 
-# Test-Aufruf
-url = "https://de.wikipedia.org/wiki/Berlin"
-ergebnis = fetch_infobox_data(url)
+
+if __name__ == '__main__':
+    # Test-Aufruf
+    country = "Deutschland"
+    ergebnis = fetch_infobox_data(country)
+    print(ergebnis)
