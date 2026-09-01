@@ -13,6 +13,12 @@ def play_game(difficulties, country, infobox_data) -> int:
             score -= 1
             continue
 
+        if score == len(difficulties):
+            print(f"{BRIGHT_WHITE} - - - Erster Hinweis: ", end="")
+        else:
+            print(f"{BRIGHT_WHITE} - - - Nächster Hinweis: ", end="")
+
+
         print(random_info)
         guess = get_country_from_user()
 

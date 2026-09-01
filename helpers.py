@@ -31,8 +31,7 @@ def get_random_info(difficulty, infobox_data) -> str:
   info_difficulties[difficulty].remove(info)
 
   if info in infobox_data:
-    print(f"{BRIGHT_WHITE} - - - Nächster Hinweis: {BOLD+BRIGHT_GREEN}{info}{RESET} - - -")
-    return f"\t {BRIGHT_GREEN}-> {infobox_data[info]}{RESET}\n"
+    return f"{BOLD+BRIGHT_GREEN}{info}{RESET} - - -\n\t {BRIGHT_GREEN}-> {infobox_data[info]}{RESET}\n"
   else:
     return get_random_info(difficulty, infobox_data)
 
