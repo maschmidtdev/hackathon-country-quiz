@@ -32,15 +32,13 @@ def function_menu_choice(input_user_choice_menu):
 
     elif input_user_choice_menu == 2:
         game()
-        # Aufruf Funktion game() für Start des Spiels
 
     elif input_user_choice_menu == 3:
         pass
         # Spielmodi (TBC)
 
     elif input_user_choice_menu == 4:
-        pass
-        # print("Das Spiel wird beendet.")
+        print("Das Spiel wird beendet.")
 
 def game():
     difficulties = get_difficulties()
@@ -56,22 +54,23 @@ def game():
 
 
 def main():
-    print("""
-1) Spielregeln
-2) Spielbeginn
-3) Spielmodi (TBC)
-4) Spiel beenden
-""")
 # Punkt 2) C. mögliche Menü - Ergänzung:
     # Woher kommst du?
     # Möchtest du das Spiel nur innerhalb eines Kontinentes spielen?
     # Highscore Liste
 
     while True:
+        print ("Bitte geben Sie eine Zahl für den gewünschten Menüpunkt ein:")
+
+        print("""
+        1) Spielregeln
+        2) Spielbeginn
+        3) Spielmodi (TBC)
+        4) Spiel beenden
+        """)
+
         try:
-            enter_number_menu = int(input(
-                "Bitte geben Sie eine Zahl für den gewünschten Menüpunkt ein: "
-                ))
+            enter_number_menu = int(input("Ihre Auswahl: "))
 
             if enter_number_menu < 1 or enter_number_menu > 4:
                 print(f"{BRIGHT_YELLOW+BOLD}Ungültige Eingabe. Bitte geben Sie eine Zahl von 1 bis 4 ein.{RESET}")
