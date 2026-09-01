@@ -1,18 +1,46 @@
 import random
-
-import requests
-from bs4 import BeautifulSoup
 from infobox import fetch_infobox_data
 
 
 countries = ["Deutschland", "Frankreich", "Spanien", "Italien", "Namibia"]
 
-info_difficulty = {
-    "schwer": ["Wahlsprache","Amtssprache", "Hauptstadt"],
-    "mittel": ["Staatsoberhaupt","Staatsreligion", "Fläche"],
-    "leicht": ["Zeitzone","Telefonvorwahl", "Kfz-Kennzeichen"]
-}
 
+
+info_difficulty = {
+    "ignore": [
+        "Errichtung",
+        "Internet-TLD",
+        "Vorgängergebilde",
+        "ISO 3166",
+        "Nationalfeiertag"
+    ],
+    "schwer": [
+        "Wahlsprache",
+        "Amtssprache",
+        "Telefonvorwahl",
+        "Staats- und Regierungsform",
+        "Bevölkerungsdichte",
+        "Parlament(e)",
+        "Bevölkerungs­entwicklung",
+        "BruttoinlandsproduktTotal (nominal)Total (KKP)BIP/Einw. (nom.)BIP/Einw. (KKP)",
+        "Index der menschlichen Entwicklung(HDI)"
+    ],
+    "mittel": [
+        "Staatsoberhaupt",
+        "Staatsreligion",
+        "Fläche",
+        "Regierungschef",
+        "Regierung",
+        "Einwohnerzahl",
+        "Währung"
+    ],
+    "leicht": [
+        "Zeitzone",
+        "Kfz-Kennzeichen",
+        "Hauptstadt",
+        "Nationalhymne"
+    ]
+}
 
 infobox_data = {}
 
@@ -22,18 +50,6 @@ difficulty_counts = {
     "mittel": 3,
     "leicht": 2
 }
-
-"""
-def get_info_box(country):
-    url = f"https://de.wikipedia.org/wiki/{country}"
-    response = requests.get(url, headers={"User-Agent": "Quiz"})
-    soup = BeautifulSoup(response.text, "html.parser")
-
-    infobox = soup.find("table", class_="infobox")
-
-    for row in infobox.find_all("tr"):
-        text = row.get_text(separator=": ", strip=True)
-"""
 
 
 def get_random_info(difficulty) -> str:
@@ -88,6 +104,23 @@ def get_difficulties() -> list:
     return difficulties
 
 
+def print_missing_info(infobox_data, info_difficulty):
+    missing = list(infobox_data.keys())
+
+    for info in infobox_data:
+        for key ,infolist in info_difficulty.items():
+            if key == "ignored":
+                continue
+
+            if info in infolist:
+                missing.remove(info)
+                break
+
+    print("Missing infos")
+    for info in missing:
+        print("-", info)
+
+
 def game():
     # Menü anzeigen (siehe whiteboard/excalidraw) - Annika
     # Spielablauf/Spiellogik
@@ -105,6 +138,8 @@ def game():
     country = random.choice(countries)
     infobox_data.update(fetch_infobox_data(country))
 
+    print_missing_info(infobox_data, info_difficulty)
+
     # Loop
     score = play_game(difficulties, country)
 
@@ -114,5 +149,9 @@ def game():
         print("Game over! Das gesuchte Land war:", country)
 
 
-if __name__ == "__main__":
+def main():
     game()
+
+
+if __name__ == "__main__":
+    main()
