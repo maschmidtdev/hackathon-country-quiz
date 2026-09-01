@@ -1,3 +1,91 @@
+Algerien
+Angola
+Antigua und Barbuda
+Äquatorialguinea
+Äthiopien
+Bahamas
+Barbados
+Belize
+Benin
+Bolivien
+Botswana
+Burkina Faso
+Burundi
+Costa Rica
+Dominica
+Dominikanische Republik
+Dschibuti
+Ecuador
+El Salvador
+Elfenbeinküste
+Eritrea
+Eswatini
+Fidschi
+Gabun
+Gambia
+Grenada
+Guatemala
+Guinea
+Guinea-Bissau
+Guyana
+Haiti
+Honduras
+Jamaika
+Jemen
+Kamerun
+Kap Verde
+Kiribati
+Komoren
+Kuba
+Lesotho
+Liberia
+Libyen
+Liechtenstein
+Madagaskar
+Malawi
+Mali
+Marshallinseln
+Mauretanien
+Mauritius
+Mikronesien
+Mosambik
+Namibia
+Nauru
+Nicaragua
+Niger
+Nordkorea
+Palau
+Palästina
+Panama
+Papua-Neuguinea
+Paraguay
+Ruanda
+Russland
+Salomonen
+Sambia
+Samoa
+São Tomé und Príncipe
+Senegal
+Seychellen
+Sierra Leone
+Simbabwe
+Somalia
+Sudan
+Südsudan
+Suriname
+Syrien
+Tansania
+Timor-Leste
+Togo
+Tonga
+Tschad
+Tunesien
+Tuvalu
+Uganda
+Uruguay
+Vanuatu
+Vatikanstadt
+Venezuela
 Deutschland
 Frankreich
 Spanien

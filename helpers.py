@@ -71,7 +71,7 @@ def get_difficulties() -> list:
 
 def print_missing_info():
     missing = []
-    for country in get_countries()[:50]:
+    for country in get_countries()[98:]:
       country_infos = fetch_infobox_data(country)
 
       for info, value in country_infos.items():

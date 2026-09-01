@@ -10,7 +10,8 @@ info_difficulties = {
     ],
     "maybe": [
         "National­hymne",
-        "Flagge"
+        "Flagge",
+        "Fahne"
     ],
     "schwer": [
         "Wahlsprache",
@@ -25,7 +26,9 @@ info_difficulties = {
         "Staatsform",
         "Bruttoinlandsprodukt",
         "Brutto­inlands­produkt pro Einwohner",
-        "Bevölkerungs­entwicklung"
+        "Bevölkerungs­entwicklung",
+        "BruttoinlandsproduktTotal (nominal)BIP/Einw. (nom.)",
+        "GeographischeLage"
     ],
     "mittel": [
         "Staatsoberhaupt",
@@ -34,13 +37,21 @@ info_difficulties = {
         "Regierungschef",
         "Regierung",
         "Einwohnerzahl",
-        "Währung"
+        "Währung",
+        "Staatsoberhaupt, zugleichRegierungschef",
+        "Gewässer",
+        "Länge",
+        "Breite",
+        "Höchste Erhebung",
+        "Einwohner"
     ],
     "leicht": [
         "Zeitzone",
         "Kfz-Kennzeichen",
         "Hauptstadt",
-        "Nationalhymne"
+        "Nationalhymne",
+        "Regierungssitz",
+        "Hauptort"
     ]
 }
 
