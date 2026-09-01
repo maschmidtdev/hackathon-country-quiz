@@ -141,8 +141,6 @@ def function_menu_choice(input_user_choice_menu):
 
 
 
-
-
 def game():
     # Menü anzeigen (siehe whiteboard/excalidraw) - Annika
     # Spielablauf/Spiellogik
@@ -154,24 +152,6 @@ def game():
     #       - Erfolg = gratulieren, punkte display, -> Menü
     #       - Falsch geraten, evtl. schwierigkeit anpassen, nächster Hinweis
     #       - nach X versuchen spiel verloren, menü ?
-    
-    print("""
-1) Einführung zum Spiel
-2) Wähle folgende Option:
-    A. Neues Spiel
-    B. Spielregeln
-    C. Spielmodi (TBC)
-    D. Spiel beenden
-""")
-
-# Punkt 2) C. mögliche Ergänzung:
-    # Woher kommst du?
-    # Möchtest du das Spiel nur innerhalb eines Kontinentes spielen?
-    # Highscore Liste
-
-    
-if __name__ == '__main__':
-    game()
 
     # TODO: make function
     difficulties = get_difficulties()
@@ -187,12 +167,26 @@ if __name__ == '__main__':
         print("Win! Score:", score)
     else:
         print("Game over! Das gesuchte Land war:", country)
+    
+
 
 
 def main():
+    print("""
+    1) Einführung zum Spiel
+    2) Wähle folgende Option:
+        A. Neues Spiel
+        B. Spielregeln
+        C. Spielmodi (TBC)
+        D. Spiel beenden
+    """)
+
+    # Punkt 2) C. mögliche Ergänzung:
+    # Woher kommst du?
+    # Möchtest du das Spiel nur innerhalb eines Kontinentes spielen?
+    # Highscore Liste
+
     game()
-
-
-if __name__ == "__main__":
+    
+if __name__ == '__main__':
     main()
- main
