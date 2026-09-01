@@ -1,3 +1,4 @@
+Frankreich
 Algerien
 Angola
 Antigua und Barbuda
@@ -87,7 +88,6 @@ Vanuatu
 Vatikanstadt
 Venezuela
 Deutschland
-Frankreich
 Spanien
 Italien
 Portugal

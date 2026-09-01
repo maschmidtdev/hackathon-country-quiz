@@ -7,7 +7,7 @@ def play_game(difficulties, country, infobox_data) -> int:
     score = len(difficulties)
 
     for difficulty in difficulties:
-        random_info = (get_random_info(difficulty, infobox_data))
+        random_info = (get_random_info(difficulty, infobox_data, country))
 
         if not random_info:
             score -= 1
@@ -47,6 +47,7 @@ def function_menu_choice(input_user_choice_menu):
 def game():
     difficulties = get_difficulties()
     country = str(random.choice(get_countries()))
+    country = "frankreich"
     infobox_data = get_infobox_data(country)
 
     score = play_game(difficulties, country, infobox_data)

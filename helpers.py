@@ -4,6 +4,7 @@ from infobox import fetch_infobox_data
 from text_formatting import *
 from geopy.distance import geodesic
 from geopy.geocoders import Nominatim
+from audio import play_hymn
 
 
 def get_infobox_data(country) -> dict:
@@ -23,7 +24,7 @@ def get_countries() -> list:
   return countries
 
 
-def get_random_info(difficulty, infobox_data) -> str:
+def get_random_info(difficulty, infobox_data, country) -> str:
   if len(info_difficulties[difficulty]) == 0:
     return ""
 
@@ -31,9 +32,15 @@ def get_random_info(difficulty, infobox_data) -> str:
   info_difficulties[difficulty].remove(info)
 
   if info in infobox_data:
-    return f"{BOLD+BRIGHT_GREEN}{info}{RESET} - - -\n\t {BRIGHT_GREEN}-> {infobox_data[info]}{RESET}\n"
+
+    if info == "National­hymne":
+      play_hymn(country)
+      return f"{BOLD+BRIGHT_GREEN}{info}{RESET} - - -\n"
+    else:
+      return f"{BOLD+BRIGHT_GREEN}{info}{RESET} - - -\n\t {BRIGHT_GREEN}-> {infobox_data[info]}{RESET}\n"
+
   else:
-    return get_random_info(difficulty, infobox_data)
+    return get_random_info(difficulty, infobox_data, country)
 
 
 def get_country_from_user() -> str:
@@ -70,7 +77,7 @@ def get_difficulties() -> list:
 
 def print_missing_info():
     missing = []
-    for country in get_countries()[98:]:
+    for country in get_countries():
       country_infos = fetch_infobox_data(country)
 
       for info, value in country_infos.items():

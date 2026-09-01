@@ -9,7 +9,6 @@ info_difficulties = {
         "Verfassung"
     ],
     "maybe": [
-        "National­hymne",
         "Flagge",
         "Fahne"
     ],
@@ -51,7 +50,8 @@ info_difficulties = {
         "Hauptstadt",
         "Nationalhymne",
         "Regierungssitz",
-        "Hauptort"
+        "Hauptort",
+        "National­hymne",
     ]
 }
 
