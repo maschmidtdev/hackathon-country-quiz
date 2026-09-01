@@ -19,3 +19,6 @@ BRIGHT_CYAN = "\033[96m"
 BRIGHT_WHITE = "\033[97m"
 
 BOLD = "\033[1m"
+
+FULL_HEART = "♥"
+EMPTY_HEART = "♡"

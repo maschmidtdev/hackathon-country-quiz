@@ -2,15 +2,9 @@
 
 ### Exceptions finden/abfangen
 
-### Hinweis bei falscher antwprt (zB "du liegst x kilometer daneben)
-Robert
-
 ### Highscore liste
-
-### Anzeigen wievielter versuch/wieviele versuche übrig
-
-### Textformatierung, farben, abstände etc
-Marcel
-
-### Mehr Länder + fehlende kategorien aus allen ländern
-Marcel
+Anzahl X Leben
+Wenn Land nicht erraten -1 Leben
+0 Leben = Game Over
+Land erraten wird auf gesamtscore addiert
+Nach Game Over -> Gesamtscore in Highscore speichern
