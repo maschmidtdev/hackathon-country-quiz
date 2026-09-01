@@ -11,3 +11,6 @@ Robert
 
 ### Textformatierung, farben, abstände etc
 Marcel
+
+### Mehr Länder + fehlende kategorien aus allen ländern
+Marcel

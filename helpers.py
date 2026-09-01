@@ -28,7 +28,8 @@ def get_random_info(difficulty, infobox_data) -> str:
   info_difficulties[difficulty].remove(info)
 
   if info in infobox_data:
-    return f"{BOLD}{info}{RESET}: {infobox_data[info]}"
+    print(f"{BRIGHT_WHITE} - - - Nächster Hinweis: {BOLD+BRIGHT_GREEN}{info}{RESET} - - -")
+    return f"\t {BRIGHT_GREEN}-> {infobox_data[info]}{RESET}"
   else:
     return get_random_info(difficulty, infobox_data)
 
@@ -36,8 +37,8 @@ def get_random_info(difficulty, infobox_data) -> str:
 def get_country_from_user() -> str:
   guess = input(f"{BRIGHT_WHITE}Auf welches Land tippst du?: {RESET}")
 
-  if not guess:
-    print(f"{BRIGHT_YELLOW+BOLD}Eingabe ungültig, erneute Eingabe:{RESET}")
+  if not guess.isalpha():
+    print(f"{BRIGHT_YELLOW+BOLD}Ungültige Eingabe: Bitte nur Buchstaben verwenden:{RESET}")
     return get_country_from_user()
 
   return guess

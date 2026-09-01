@@ -19,6 +19,7 @@ def play_game(difficulties, country, infobox_data) -> int:
         if country.lower() == guess.lower():
             return score
         else:
+            print(f"{BRIGHT_CYAN}{guess}{BRIGHT_MAGENTA} war leider falsch!\n{RESET}")
             score -= 1
 
     return score
@@ -49,9 +50,9 @@ def game():
     score = play_game(difficulties, country, infobox_data)
 
     if score > 0:
-        print("Win! Score:", score)
+        print(f"{BOLD+BRIGHT_GREEN}Du hast gewonnen!{RESET}{BRIGHT_WHITE} Dein Score: {BRIGHT_CYAN}{score}{RESET}")
     else:
-        print("Game over! Das gesuchte Land war:", country)
+        print(f"{BOLD+BRIGHT_RED}Game over!{RESET}{BRIGHT_WHITE} Das gesuchte Land war: {BRIGHT_CYAN}{country}{RESET}")
 
 
 def main():
