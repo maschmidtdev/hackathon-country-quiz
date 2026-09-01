@@ -52,22 +52,30 @@ def get_difficulties() -> list:
     return difficulties
 
 
-def print_missing_info(info_data, info_difficulty):
-    missing = list(info_data.keys())
-    for info in info_data:
-        for key ,infolist in info_difficulty.items():
-            if info in infolist:
-                missing.remove(info)
-                break
+def print_missing_info():
+    missing = []
+    for country in get_countries()[:50]:
+      country_infos = fetch_infobox_data(country)
 
-    print(f"{BOLD}Missing infos{RESET}")
-    for info in missing:
-        print("-", info)
-    print("\n")
+      for info, value in country_infos.items():
+
+        found = False
+        for info_list in info_difficulties.values():
+          if info in info_list:
+            found = True
+            break
+
+        if not found:
+          missing.append({"info key": info, "info value": value})
+
+    print("MISSING")
+    for item in missing:
+      print(item)
+
 
 
 def main():
-    #print_missing_info()
+    print_missing_info()
     pass
 
 if __name__ == '__main__':
