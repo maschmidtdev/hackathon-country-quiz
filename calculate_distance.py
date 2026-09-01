@@ -1,7 +1,7 @@
 from geopy.distance import geodesic
 from geopy.geocoders import Nominatim
 
-def calculate_distance(country_to_find, guess_user):
+def get_distance(country_to_find, guess_user):
     # Berechnet die Distanz direkt in Kilometern
     return geodesic(country_to_find, guess_user).km
 
@@ -18,5 +18,5 @@ def get_coordinates(country):
 guess_user = input("Gib ein Land ein: ")
 country = "Frankreich" # Hier ist unser gewähltes Land im Spiel
 
-distance = calculate_distance(get_coordinates(country), get_coordinates(guess_user))
+distance = get_distance(get_coordinates(country), get_coordinates(guess_user))
 print(f"Die Hauptstadt deines Tipps liegt ca. {int(distance)} km von der Haupstadt des gesuchten Landes entfernt.")
