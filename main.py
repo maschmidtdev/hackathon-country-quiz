@@ -1,6 +1,6 @@
 import random
 from text_formatting import *
-from helpers import get_random_info, get_countries, get_country_from_user, get_difficulties, get_infobox_data
+from helpers import get_random_info, get_countries, get_country_from_user, get_difficulties, get_infobox_data, get_coordinates, get_distance
 
 
 def play_game(difficulties, country, infobox_data) -> int:
@@ -21,6 +21,8 @@ def play_game(difficulties, country, infobox_data) -> int:
         else:
             print(f"{BRIGHT_CYAN}{guess}{BRIGHT_MAGENTA} war leider falsch!\n{RESET}")
             score -= 1
+            distance = get_distance(get_coordinates(country), get_coordinates(guess))
+            print(f"Die Hauptstadt deines Tipps liegt ca. {int(distance)} km von der Haupstadt des gesuchten Landes entfernt.")
 
     return score
 

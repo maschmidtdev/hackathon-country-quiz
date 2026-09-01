@@ -2,6 +2,9 @@ import random
 from config import info_difficulties, difficulty_counts
 from infobox import fetch_infobox_data
 from text_formatting import *
+from geopy.distance import geodesic
+from geopy.geocoders import Nominatim
+
 
 def get_infobox_data(country) -> dict:
   return fetch_infobox_data(country)
@@ -42,6 +45,20 @@ def get_country_from_user() -> str:
     return get_country_from_user()
 
   return guess
+
+
+def get_distance(country_to_find, guess_user):
+    # Berechnet die Distanz direkt in Kilometern
+    return geodesic(country_to_find, guess_user).km
+
+
+def get_coordinates(country):
+    # User-Agent ist Pflicht - sagt dem Server, wer die Anfrage schickt
+    geolocator = Nominatim(user_agent="verlaender_dich_nicht")
+    location = geolocator.geocode(country)
+    if location:
+        koordinaten = (location.latitude, location.longitude)
+        return koordinaten
 
 
 def get_difficulties() -> list:
