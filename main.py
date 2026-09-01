@@ -19,10 +19,10 @@ def play_game(difficulties, country, infobox_data) -> int:
         if country.lower() == guess.lower():
             return score
         else:
-            print(f"{BRIGHT_CYAN}{guess}{BRIGHT_MAGENTA} war leider falsch!\n{RESET}")
+            print(f"{BRIGHT_CYAN}{guess}{BRIGHT_MAGENTA} war leider falsch!{RESET}")
             score -= 1
             distance = get_distance(get_coordinates(country), get_coordinates(guess))
-            print(f"Die Hauptstadt deines Tipps liegt ca. {int(distance)} km von der Haupstadt des gesuchten Landes entfernt.")
+            print(f"{BRIGHT_WHITE}Die Hauptstadt deines Tipps liegt ca. {BRIGHT_CYAN}{int(distance)}{BRIGHT_WHITE} km von der Haupstadt des gesuchten Landes entfernt.{RESET}\n")
 
     return score
 
