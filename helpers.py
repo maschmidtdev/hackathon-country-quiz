@@ -8,6 +8,18 @@ from geopy.geocoders import Nominatim
 from audio import play_hymn
 
 
+
+def special_capitalize(country) -> str:
+  words = country.split()
+  new_words = []
+  for word in words:
+    if word not in ["und"]:
+      new_words.append(word.capitalize())
+    else:
+      new_words.append(word)
+
+  return " ".join(new_words)
+
 def get_infobox_data(country) -> dict:
   return fetch_infobox_data(country)
 
@@ -43,9 +55,9 @@ def get_random_info(difficulty, info_difficulties, infobox_data, country) -> str
 
 
   if info in infobox_data:
-
-    if info == "National­hymne":
-      play_hymn(country)
+    # Flexibler Check auf "Hymne" (deckt auch unsichtbare Trennzeichen ab)
+    if "hymne" in info.lower():
+      play_hymn(country, infobox_data)
       return f"{BOLD+BRIGHT_GREEN}{info}{RESET} - - -\n"
     else:
       return f"{BOLD+BRIGHT_GREEN}{info}{RESET} - - -\n\t {BRIGHT_GREEN}-> {infobox_data[info]}{RESET}\n"
@@ -76,6 +88,8 @@ def get_coordinates(country):
     if location:
         koordinaten = (location.latitude, location.longitude)
         return koordinaten
+    else:
+        return None
 
 
 def display_lives(lives, max_lives):
@@ -106,8 +120,9 @@ def print_missing_info():
 
 
 def main():
-    print_missing_info()
-    pass
+    #print_missing_info()
+    print(special_capitalize("bosnien und herzegowina"))
+
 
 
 if __name__ == '__main__':
