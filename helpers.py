@@ -32,9 +32,9 @@ def get_random_info(difficulty, infobox_data, country) -> str:
   info_difficulties[difficulty].remove(info)
 
   if info in infobox_data:
-
-    if info == "National­hymne":
-      play_hymn(country)
+    # Flexibler Check auf "Hymne" (deckt auch unsichtbare Trennzeichen ab)
+    if "hymne" in info.lower():
+      play_hymn(country, infobox_data)
       return f"{BOLD+BRIGHT_GREEN}{info}{RESET} - - -\n"
     else:
       return f"{BOLD+BRIGHT_GREEN}{info}{RESET} - - -\n\t {BRIGHT_GREEN}-> {infobox_data[info]}{RESET}\n"
@@ -98,10 +98,10 @@ def print_missing_info():
       print(item)
 
 
-
 def main():
     print_missing_info()
     pass
+
 
 if __name__ == '__main__':
     main()

@@ -1,21 +1,29 @@
 import random
 from text_formatting import *
-from helpers import get_random_info, get_countries, get_country_from_user, get_difficulties, get_infobox_data, get_coordinates, get_distance
+from helpers import (
+    get_random_info,
+    get_countries,
+    get_country_from_user,
+    get_difficulties,
+    get_infobox_data,
+    get_coordinates,
+    get_distance,
+)
 
 
 def play_game(difficulties, country, infobox_data) -> int:
     score = len(difficulties)
 
     for difficulty in difficulties:
-        random_info = (get_random_info(difficulty, infobox_data, country))
+        random_info = get_random_info(difficulty, infobox_data, country)
 
         if not random_info:
             score -= 1
             continue
 
-        print(f"{BRIGHT_WHITE} - - - {len(difficulties) - score +1}. Hinweis: ", end="")
-
-        print(random_info)
+        print(f"{BRIGHT_WHITE} - - - {len(difficulties) - score + 1}. Hinweis: ", end="")
+        print(random_info, end="")  # Gibt den Hinweis aus (und spielt bei Hymne automatisch den Sound ab)
+        
         guess = get_country_from_user()
 
         if country.lower() == guess.lower():
@@ -31,6 +39,7 @@ def play_game(difficulties, country, infobox_data) -> int:
                 print(f"{BRIGHT_WHITE}Die Hauptstadt deines Tipps liegt ca. {BRIGHT_CYAN}{int(distance)}{BRIGHT_WHITE} km von der Haupstadt des gesuchten Landes entfernt.{RESET}\n")
 
     return score
+
 
 def function_menu_choice(input_user_choice_menu):
     if input_user_choice_menu == 1:
@@ -48,10 +57,15 @@ def function_menu_choice(input_user_choice_menu):
     elif input_user_choice_menu == 4:
         print("Das Spiel wird beendet.")
 
+
 def game():
     difficulties = get_difficulties()
     country = str(random.choice(get_countries()))
-    country = "frankreich"
+    
+    # um zu Testen Frankreich nutzen , lass die nächste Zeile drin, 
+    # ansonsten  für zufällige Länder auskommentieren:
+    #country = "frankreich"
+    
     infobox_data = get_infobox_data(country)
 
     score = play_game(difficulties, country, infobox_data)
@@ -63,13 +77,8 @@ def game():
 
 
 def main():
-# Punkt 2) C. mögliche Menü - Ergänzung:
-    # Woher kommst du?
-    # Möchtest du das Spiel nur innerhalb eines Kontinentes spielen?
-    # Highscore Liste
-
     while True:
-        print ("Bitte geben Sie eine Zahl für den gewünschten Menüpunkt ein:")
+        print("Bitte geben Sie eine Zahl für den gewünschten Menüpunkt ein:")
 
         print("""
         1) Spielregeln
@@ -96,5 +105,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-
