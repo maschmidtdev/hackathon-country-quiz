@@ -24,3 +24,5 @@ BOLD = "\033[1m"
 
 FULL_HEART = "♥"
 EMPTY_HEART = "♡"
+
+CHEAT = "\033[38;2;25;26;28m"

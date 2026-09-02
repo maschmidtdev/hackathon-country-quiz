@@ -15,13 +15,12 @@ from helpers import (
 )
 
 
-def play_game(difficulties, country, infobox_data) -> int:
+def play_game(difficulties, country, infobox_data, cheat) -> int:
     score = len(difficulties)
     info_difficulties = get_info_difficulties()
 
     for difficulty in difficulties:
         random_info = get_random_info(difficulty, info_difficulties, infobox_data, country)
-
         if not random_info:
             score -= 1
             continue
@@ -29,8 +28,10 @@ def play_game(difficulties, country, infobox_data) -> int:
         max_hints = len(difficulties)
         current_hint = max_hints - score + 1
 
-        print(f"{BRIGHT_WHITE} - - - Hinweis {current_hint}/{max_hints} ({difficulty}) ", end="")
+        if cheat:
+            print(f"Gesuchtes Land: {CHEAT}{country}{RESET}")
 
+        print(f"{BRIGHT_WHITE} - - - Hinweis {current_hint}/{max_hints} ({difficulty}) ", end="")
         print(random_info)
         guess = get_country_from_user()
 
@@ -76,15 +77,14 @@ def high_score_screen():
             case 0:
                 rank_color = BRIGHT_YELLOW
             case 1:
-                rank_color = RESET
+                rank_color = BRIGHT_WHITE
             case 2:
                 rank_color = BRONZE
             case _:
-                rank_color = BRIGHT_WHITE
+                rank_color = RESET
 
         name, score = high_scores[i].strip().split(";")
         print(f"{i+1}. {rank_color}{name} - {score}{RESET}")
-
 
 
 def high_score_count_file(score):
@@ -104,25 +104,30 @@ def function_menu_choice(input_user_choice_menu):
         game(MAX_LIVES)
 
     elif input_user_choice_menu == 3:
-        high_score_screen()
+        game(MAX_LIVES, 0, True)
 
     elif input_user_choice_menu == 4:
+        high_score_screen()
+
+    elif input_user_choice_menu == 5:
         print("Das Spiel wird beendet.")
 
-def game(lives, score = 0):
+
+
+def game(lives, score = 0, cheat = False):
     difficulties = get_difficulties()
     country = str(random.choice(get_countries()))
     # for testing
-    country = "dominikanische republik"
-    infobox_data = get_infobox_data(special_capitalize(country))
+    # country = "dominikanische republik"
 
-    new_score = play_game(difficulties, country, infobox_data)
+    infobox_data = get_infobox_data(special_capitalize(country))
+    new_score = play_game(difficulties, country, infobox_data, cheat)
 
     if new_score > 0:
         new_score += score
         print(f"{BOLD+BRIGHT_GREEN}Korrekt!{RESET}{BRIGHT_WHITE} Dein aktueller Score: {BRIGHT_CYAN}{new_score}{RESET}")
         display_lives(lives, MAX_LIVES)
-        game(lives, new_score)
+        game(lives, new_score, cheat)
 
     else:
         lives -= 1
@@ -130,7 +135,7 @@ def game(lives, score = 0):
         display_lives(lives, MAX_LIVES)
 
         if lives > 0:
-            game(lives, score)
+            game(lives, score, cheat)
         else:
             print(f"{BRIGHT_RED}Game Over!{RESET}{BRIGHT_WHITE} Dein Score: {BRIGHT_CYAN}{score}{RESET}\n")
             high_score_count_file(score)
@@ -143,20 +148,21 @@ def main():
         print("""
         1) Spielregeln
         2) Spielbeginn
-        3) High score
-        4) Spiel beenden
+        3) Spielbeginn (Demo cheat mode)
+        4) High score
+        5) Spiel beenden
         """)
 
         try:
             enter_number_menu = int(input("Ihre Auswahl: "))
 
-            if enter_number_menu < 1 or enter_number_menu > 4:
+            if enter_number_menu < 1 or enter_number_menu > 5:
                 print(f"{BRIGHT_YELLOW+BOLD}Ungültige Eingabe. Bitte geben Sie eine Zahl von 1 bis 4 ein.{RESET}")
                 continue
 
             function_menu_choice(enter_number_menu)
 
-            if enter_number_menu == 4:
+            if enter_number_menu == 5:
                 break
 
         except ValueError:
