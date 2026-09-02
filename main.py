@@ -9,7 +9,9 @@ from helpers import (
     get_info_difficulties,
     get_infobox_data,
     get_coordinates,
-    get_distance, display_lives
+    get_distance,
+    special_capitalize,
+    display_lives
 )
 
 
@@ -35,10 +37,18 @@ def play_game(difficulties, country, infobox_data) -> int:
         if country.lower() == guess.lower():
             return score
         else:
-            print(f"{BRIGHT_CYAN}{guess.capitalize()}{BRIGHT_MAGENTA} war leider falsch!{RESET}")
+            print(f"{BRIGHT_CYAN}{special_capitalize(guess)}{BRIGHT_MAGENTA} war leider falsch!{RESET}")
             score -= 1
-            distance = get_distance(get_coordinates(country), get_coordinates(guess))
-            print(f"{BRIGHT_WHITE}Die Hauptstadt deines Tipps liegt ca. {BRIGHT_CYAN}{int(distance)}{BRIGHT_WHITE} km von der Haupstadt des gesuchten Landes entfernt.{RESET}\n")
+
+            try:
+                coordinates_country_to_guess = get_coordinates(special_capitalize(country))
+                coordinates_user_guess = get_coordinates(guess)
+
+                if coordinates_country_to_guess != None and coordinates_user_guess != None:
+                    distance = get_distance(coordinates_country_to_guess, coordinates_user_guess)
+                    print(f"{BRIGHT_WHITE}Die Hauptstadt deines Tipps liegt ca. {BRIGHT_CYAN}{int(distance)}{BRIGHT_WHITE} km von der Haupstadt des gesuchten Landes entfernt.{RESET}\n")
+            except:
+                print("(Exception: Distanz konnte nicht abgefragt werden)\n")
 
     return score
 
@@ -49,26 +59,36 @@ def high_score_screen():
         with open("highscore.txt", "r", encoding="utf-8") as file:
             high_scores = file.readlines()
 
-        if not high_scores:
-            print("Es gibt noch keine Highscores.")
-            return
+    except FileNotFoundError:
+        print("Es gibt noch keine Highscores.")
+        return
+
 
     # sort by highest score
-        high_scores.sort(
-            key=lambda line:int(line.strip().split(";")[1]),
-            reverse=True
+    high_scores.sort(
+        key=lambda line:int(line.strip().split(";")[1]),
+        reverse=True
     )
 
     # display name - score
-        for line in high_scores:
-            name, score = line.strip().split(";")
-            print(f"{name} - {score}")
+    for i in range(len(high_scores)):
+        match i:
+            case 0:
+                rank_color = BRIGHT_YELLOW
+            case 1:
+                rank_color = RESET
+            case 2:
+                rank_color = BRONZE
+            case _:
+                rank_color = BRIGHT_WHITE
 
-    except FileNotFoundError:
-        print("Es gibt noch keine Highscores.")
+        name, score = high_scores[i].strip().split(";")
+        print(f"{i+1}. {rank_color}{name} - {score}{RESET}")
+
+
 
 def high_score_count_file(score):
-    input_name_gamer = input("Bitte geben Sie Ihren Namen ein:")
+    input_name_gamer = input("Bitte geben Sie Ihren Namen ein: ")
 
     with open("highscore.txt", "a", encoding="utf-8") as file:
         file.write(f"{input_name_gamer};{score}\n")
@@ -92,7 +112,9 @@ def function_menu_choice(input_user_choice_menu):
 def game(lives, score = 0):
     difficulties = get_difficulties()
     country = str(random.choice(get_countries()))
-    infobox_data = get_infobox_data(country)
+    # for testing
+    country = "dominikanische republik"
+    infobox_data = get_infobox_data(special_capitalize(country))
 
     new_score = play_game(difficulties, country, infobox_data)
 
@@ -104,25 +126,19 @@ def game(lives, score = 0):
 
     else:
         lives -= 1
-        print(f"{BOLD+BRIGHT_RED}Das wars!{RESET}{BRIGHT_WHITE} Das gesuchte Land war: {BRIGHT_CYAN}{country.capitalize()}{RESET}")
+        print(f"{BOLD+BRIGHT_RED}Das wars!{RESET}{BRIGHT_WHITE} Das gesuchte Land war: {BRIGHT_CYAN}{special_capitalize(country)}{RESET}")
         display_lives(lives, MAX_LIVES)
 
         if lives > 0:
             game(lives, score)
         else:
             print(f"{BRIGHT_RED}Game Over!{RESET}{BRIGHT_WHITE} Dein Score: {BRIGHT_CYAN}{score}{RESET}\n")
-
-        high_score_count_file(score)
+            high_score_count_file(score)
 
 
 def main():
-# Punkt 2) C. mögliche Menü - Ergänzung:
-    # Woher kommst du?
-    # Möchtest du das Spiel nur innerhalb eines Kontinentes spielen?
-    # Highscore Liste
-
     while True:
-        print ("Bitte geben Sie eine Zahl für den gewünschten Menüpunkt ein:")
+        print("Bitte geben Sie eine Zahl für den gewünschten Menüpunkt ein:")
 
         print("""
         1) Spielregeln
@@ -149,3 +165,5 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+

@@ -1,4 +1,4 @@
-MAX_LIVES = 3
+MAX_LIVES = 2
 
 info_difficulties = {
     "ignore": [
@@ -58,7 +58,7 @@ info_difficulties = {
 }
 
 difficulty_counts = {
-    "schwer": 2,
-    "mittel": 3,
-    "leicht": 2
+    "schwer": 0,
+    "mittel": 0,
+    "leicht": 1
 }
