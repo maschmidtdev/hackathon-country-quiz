@@ -1,4 +1,5 @@
 import random
+from copy import deepcopy
 from config import info_difficulties, difficulty_counts
 from infobox import fetch_infobox_data
 from text_formatting import *
@@ -11,8 +12,16 @@ def get_infobox_data(country) -> dict:
   return fetch_infobox_data(country)
 
 
-def get_info_difficulties() -> list:
-  return info_difficulties
+def get_info_difficulties() -> dict:
+  return deepcopy(info_difficulties)
+
+
+def get_difficulties() -> list:
+    difficulties = []
+    for key, value in difficulty_counts.items():
+        for i in range(value):
+            difficulties.append(key)
+    return difficulties
 
 
 def get_countries() -> list:
@@ -24,12 +33,14 @@ def get_countries() -> list:
   return countries
 
 
-def get_random_info(difficulty, infobox_data, country) -> str:
+def get_random_info(difficulty, info_difficulties, infobox_data, country) -> str:
+
   if len(info_difficulties[difficulty]) == 0:
     return ""
 
   info = random.choice(info_difficulties[difficulty])
   info_difficulties[difficulty].remove(info)
+
 
   if info in infobox_data:
 
@@ -40,14 +51,14 @@ def get_random_info(difficulty, infobox_data, country) -> str:
       return f"{BOLD+BRIGHT_GREEN}{info}{RESET} - - -\n\t {BRIGHT_GREEN}-> {infobox_data[info]}{RESET}\n"
 
   else:
-    return get_random_info(difficulty, infobox_data, country)
+    return get_random_info(difficulty, info_difficulties, infobox_data, country)
 
 
 def get_country_from_user() -> str:
   guess = input(f"{BRIGHT_WHITE}Auf welches Land tippst du?: {RESET}")
 
   if guess.lower() not in get_countries():
-    print(f"{BRIGHT_YELLOW+BOLD}Kein gültiges Land, erneute Eingabe::{RESET}")
+    print(f"{BRIGHT_YELLOW+BOLD}Kein gültiges Land, erneute Eingabe:{RESET}")
     return get_country_from_user()
 
   return guess
@@ -66,13 +77,11 @@ def get_coordinates(country):
         koordinaten = (location.latitude, location.longitude)
         return koordinaten
 
+def display_lives(lives, max_lives):
+  lost_lives = max_lives - lives
+  print(
+    f"{BRIGHT_WHITE}Du hast noch {BRIGHT_CYAN}{lives}{BRIGHT_WHITE} Leben: {BRIGHT_RED}{FULL_HEART * lives}{lost_lives * EMPTY_HEART}{RESET}\n")
 
-def get_difficulties() -> list:
-    difficulties = []
-    for key, value in difficulty_counts.items():
-        for i in range(value):
-            difficulties.append(key)
-    return difficulties
 
 
 def print_missing_info():
@@ -96,10 +105,10 @@ def print_missing_info():
       print(item)
 
 
-
 def main():
     print_missing_info()
     pass
+
 
 if __name__ == '__main__':
     main()

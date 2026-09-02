@@ -1,19 +1,34 @@
 import random
 from text_formatting import *
-from helpers import get_random_info, get_countries, get_country_from_user, get_difficulties, get_infobox_data, get_coordinates, get_distance
+from config import MAX_LIVES
+from helpers import (
+    get_random_info,
+    get_countries,
+    get_country_from_user,
+    get_difficulties,
+    get_info_difficulties,
+    get_infobox_data,
+    get_coordinates,
+    get_distance, display_lives
+)
+
 
 
 def play_game(difficulties, country, infobox_data) -> int:
     score = len(difficulties)
+    info_difficulties = get_info_difficulties()
 
     for difficulty in difficulties:
-        random_info = (get_random_info(difficulty, infobox_data, country))
+        random_info = get_random_info(difficulty, info_difficulties, infobox_data, country)
 
         if not random_info:
             score -= 1
             continue
 
-        print(f"{BRIGHT_WHITE} - - - {len(difficulties) - score +1}. Hinweis: ", end="")
+        max_hints = len(difficulties)
+        current_hint = max_hints - score + 1
+
+        print(f"{BRIGHT_WHITE} - - - Hinweis {current_hint}/{max_hints} ({difficulty}) ", end="")
 
         print(random_info)
         guess = get_country_from_user()
@@ -35,7 +50,7 @@ def function_menu_choice(input_user_choice_menu):
         print(text_output)
 
     elif input_user_choice_menu == 2:
-        game()
+        game(MAX_LIVES)
 
     elif input_user_choice_menu == 3:
         pass
@@ -44,18 +59,30 @@ def function_menu_choice(input_user_choice_menu):
     elif input_user_choice_menu == 4:
         print("Das Spiel wird beendet.")
 
-def game():
+def game(lives, score = 0):
     difficulties = get_difficulties()
     country = str(random.choice(get_countries()))
-    country = "frankreich"
     infobox_data = get_infobox_data(country)
 
-    score = play_game(difficulties, country, infobox_data)
+    new_score = play_game(difficulties, country, infobox_data)
 
-    if score > 0:
-        print(f"{BOLD+BRIGHT_GREEN}Du hast gewonnen!{RESET}{BRIGHT_WHITE} Dein Score: {BRIGHT_CYAN}{score}{RESET}\n")
+    if new_score > 0:
+        new_score += score
+        print(f"{BOLD+BRIGHT_GREEN}Korrekt!{RESET}{BRIGHT_WHITE} Dein aktueller Score: {BRIGHT_CYAN}{new_score}{RESET}")
+        display_lives(lives, MAX_LIVES)
+        game(lives, new_score)
+
     else:
-        print(f"{BOLD+BRIGHT_RED}Game over!{RESET}{BRIGHT_WHITE} Das gesuchte Land war: {BRIGHT_CYAN}{country.capitalize()}{RESET}\n")
+        lives -= 1
+        print(f"{BOLD+BRIGHT_RED}Das wars!{RESET}{BRIGHT_WHITE} Das gesuchte Land war: {BRIGHT_CYAN}{country.capitalize()}{RESET}")
+        display_lives(lives, MAX_LIVES)
+
+        if lives > 0:
+            game(lives, score)
+        else:
+            print(f"{BRIGHT_RED}Game Over!{RESET}{BRIGHT_WHITE} Dein Score: {BRIGHT_CYAN}{score}{RESET}\n")
+
+        # input highscore
 
 
 def main():
@@ -92,5 +119,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-

@@ -1,3 +1,5 @@
+MAX_LIVES = 3
+
 info_difficulties = {
     "ignore": [
         "Errichtung",
@@ -36,7 +38,6 @@ info_difficulties = {
         "Regierungschef",
         "Regierung",
         "Einwohnerzahl",
-        "Währung",
         "Staatsoberhaupt, zugleichRegierungschef",
         "Gewässer",
         "Länge",
@@ -52,6 +53,7 @@ info_difficulties = {
         "Regierungssitz",
         "Hauptort",
         "National­hymne",
+        "Währung"
     ]
 }
 

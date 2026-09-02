@@ -68,7 +68,7 @@ def play_hymn(country: str):
 
 def main():
   # Testen
-  play_hymn("Kanada")
+  play_hymn("Deutschland")
 
 if __name__ == '__main__':
     main()
