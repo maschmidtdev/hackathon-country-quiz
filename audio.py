@@ -8,7 +8,8 @@ import pygame
 
 def play_hymn(country: str, infobox_data: dict, debug = False):
   country_cap = country.title()
-  print(f"\n🔍 [AUDIO] Suche Hymne strikt über die Infobox für '{country_cap}'...")
+  if debug:
+    print(f"\n🔍 [AUDIO] Suche Hymne strikt über die Infobox für '{country_cap}'...")
 
   try:
     pygame.mixer.init()

@@ -70,15 +70,25 @@ def high_score_screen():
     )
 
     # display name - score
-        for line in high_scores:
-            name, score = line.strip().split(";")
-            print(f"{name} - {score}")
+        for i in range(len(high_scores)):
+            match i:
+                case 0:
+                    rank_color = BRIGHT_YELLOW
+                case 1:
+                    rank_color = RESET
+                case 2:
+                    rank_color = BRONZE
+                case _:
+                    rank_color = BRIGHT_WHITE
+
+            name, score = high_scores[i].strip().split(";")
+            print(f"{i+1}. {rank_color}{name} - {score}{RESET}")
 
     except FileNotFoundError:
         print("Es gibt noch keine Highscores.")
 
 def high_score_count_file(score):
-    input_name_gamer = input("Bitte geben Sie Ihren Namen ein:")
+    input_name_gamer = input("Bitte geben Sie Ihren Namen ein: ")
 
     with open("highscore.txt", "a", encoding="utf-8") as file:
         file.write(f"{input_name_gamer};{score}\n")
@@ -102,13 +112,8 @@ def function_menu_choice(input_user_choice_menu):
 def game(lives, score = 0):
     difficulties = get_difficulties()
     country = str(random.choice(get_countries()))
-    infobox_data = get_infobox_data(country)
-
-    # um zu Testen Frankreich nutzen , lass die nächste Zeile drin,
-    # ansonsten  für zufällige Länder auskommentieren:
-    country = "Bosnien und Herzegowina"
-    country = "frankreich"
-
+    # for testing
+    country = "dominikanische republik"
     infobox_data = get_infobox_data(special_capitalize(country))
 
     new_score = play_game(difficulties, country, infobox_data)
@@ -128,8 +133,7 @@ def game(lives, score = 0):
             game(lives, score)
         else:
             print(f"{BRIGHT_RED}Game Over!{RESET}{BRIGHT_WHITE} Dein Score: {BRIGHT_CYAN}{score}{RESET}\n")
-
-        high_score_count_file(score)
+            high_score_count_file(score)
 
 
 def main():
