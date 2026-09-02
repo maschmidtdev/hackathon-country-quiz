@@ -65,6 +65,8 @@ def get_coordinates(country):
     if location:
         koordinaten = (location.latitude, location.longitude)
         return koordinaten
+    else:
+        return None
 
 
 def get_difficulties() -> list:

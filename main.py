@@ -23,8 +23,12 @@ def play_game(difficulties, country, infobox_data) -> int:
         else:
             print(f"{BRIGHT_CYAN}{guess.capitalize()}{BRIGHT_MAGENTA} war leider falsch!{RESET}")
             score -= 1
-            distance = get_distance(get_coordinates(country), get_coordinates(guess))
-            print(f"{BRIGHT_WHITE}Die Hauptstadt deines Tipps liegt ca. {BRIGHT_CYAN}{int(distance)}{BRIGHT_WHITE} km von der Haupstadt des gesuchten Landes entfernt.{RESET}\n")
+
+            coordinates_country_to_guess = get_coordinates(country)
+            coordinates_user_guess = get_coordinates(guess)
+            if coordinates_country_to_guess != None and coordinates_user_guess != None:
+                distance = get_distance(coordinates_country_to_guess, coordinates_user_guess)
+                print(f"{BRIGHT_WHITE}Die Hauptstadt deines Tipps liegt ca. {BRIGHT_CYAN}{int(distance)}{BRIGHT_WHITE} km von der Haupstadt des gesuchten Landes entfernt.{RESET}\n")
 
     return score
 
