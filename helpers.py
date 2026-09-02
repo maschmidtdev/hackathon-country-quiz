@@ -7,6 +7,18 @@ from geopy.geocoders import Nominatim
 from audio import play_hymn
 
 
+
+def special_capitalize(country) -> str:
+  words = country.split()
+  new_words = []
+  for word in words:
+    if word not in ["und"]:
+      new_words.append(word.capitalize())
+    else:
+      new_words.append(word)
+
+  return " ".join(new_words)
+
 def get_infobox_data(country) -> dict:
   return fetch_infobox_data(country)
 
@@ -99,8 +111,8 @@ def print_missing_info():
 
 
 def main():
-    print_missing_info()
-    pass
+    #print_missing_info()
+    print(special_capitalize("bosnien und herzegowina"))
 
 
 if __name__ == '__main__':
