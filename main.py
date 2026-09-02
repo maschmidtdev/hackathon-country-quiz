@@ -113,7 +113,7 @@ def game(lives, score = 0):
     difficulties = get_difficulties()
     country = str(random.choice(get_countries()))
     # for testing
-    country = "dominikanische republik"
+    # country = "dominikanische republik"
     infobox_data = get_infobox_data(special_capitalize(country))
 
     new_score = play_game(difficulties, country, infobox_data)
