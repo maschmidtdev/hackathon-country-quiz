@@ -142,6 +142,11 @@ def game(lives, score = 0, cheat = False):
 
 
 def main():
+
+    with open("game_introduction.txt", "r", encoding="utf-8") as file:
+        introduction = file.read()
+        print(introduction)
+
     while True:
         print("Bitte geben Sie eine Zahl für den gewünschten Menüpunkt ein:")
 
