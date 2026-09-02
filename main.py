@@ -118,7 +118,7 @@ def game(lives, score = 0, cheat = False):
     difficulties = get_difficulties()
     country = str(random.choice(get_countries()))
     # for testing
-    # country = "dominikanische republik"
+    country = "deutschland"
 
     infobox_data = get_infobox_data(special_capitalize(country))
     new_score = play_game(difficulties, country, infobox_data, cheat)
@@ -145,7 +145,9 @@ def main():
 
     with open("game_introduction.txt", "r", encoding="utf-8") as file:
         introduction = file.read()
+        print(f"{BRIGHT_GREEN}\n- - - Verländer dich nicht! - - -{BRIGHT_WHITE}" )
         print(introduction)
+        print(RESET)
 
     while True:
         print("Bitte geben Sie eine Zahl für den gewünschten Menüpunkt ein:")

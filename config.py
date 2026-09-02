@@ -58,7 +58,7 @@ info_difficulties = {
 }
 
 difficulty_counts = {
-    "schwer": 0,
-    "mittel": 0,
-    "leicht": 1
+    "schwer": 2,
+    "mittel": 3,
+    "leicht": 2
 }
