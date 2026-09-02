@@ -43,14 +43,21 @@ def play_game(difficulties, country, infobox_data) -> int:
 
     return score
 
-def high_score_screen(total_score):
-    input_name_gamer = input("Bitte geben Sie Ihren Namen ein:")
-    high_score_count_file(input_name_gamer, total_score)
-    print(f"HIGH SCORE: {input_name_gamer} - {total_score} Punkte")
 
-def high_score_count_file(name, score):
+def high_score_screen():
+    # open high scores file
+
+    # sort by highest score
+
+    # display name - score
+    pass
+
+
+def high_score_count_file(score):
+    input_name_gamer = input("Bitte geben Sie Ihren Namen ein:")
     with open("highscore.txt", "a", encoding="utf-8") as file:
-        file.write(f"{name};{score}\n")
+        file.write(f"{input_name_gamer};{score}\n")
+
 
 def function_menu_choice(input_user_choice_menu, total_score):
     if input_user_choice_menu == 1:
@@ -90,7 +97,7 @@ def game(lives, score = 0):
         else:
             print(f"{BRIGHT_RED}Game Over!{RESET}{BRIGHT_WHITE} Dein Score: {BRIGHT_CYAN}{score}{RESET}\n")
 
-        # input highscore
+        high_score_count_file(score)
 
 
 def main():

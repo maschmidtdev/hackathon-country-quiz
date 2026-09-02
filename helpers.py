@@ -77,11 +77,11 @@ def get_coordinates(country):
         koordinaten = (location.latitude, location.longitude)
         return koordinaten
 
+
 def display_lives(lives, max_lives):
   lost_lives = max_lives - lives
   print(
     f"{BRIGHT_WHITE}Du hast noch {BRIGHT_CYAN}{lives}{BRIGHT_WHITE} Leben: {BRIGHT_RED}{FULL_HEART * lives}{lost_lives * EMPTY_HEART}{RESET}\n")
-
 
 
 def print_missing_info():
