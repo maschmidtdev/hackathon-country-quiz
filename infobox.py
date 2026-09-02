@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 
-def fetch_infobox_data(country):
+def fetch_infobox_data(country, verbose = False):
     url = f"https://de.wikipedia.org/wiki/{country}"
 
     headers = {"User-Agent": "QuizApp/1.0 (contact@example.com)"}
@@ -22,7 +22,8 @@ def fetch_infobox_data(country):
         return {}
 
     data = {}
-    print(f"\n--- STARTE EXTRACT VON: {url} ---")
+    if verbose:
+        print(f"\n--- STARTE EXTRACT VON: {url} ---")
     
     for row in infobox.find_all("tr"):
         cells = row.find_all(["th", "td"])
@@ -37,14 +38,17 @@ def fetch_infobox_data(country):
             
             if key and value and key != value:
                 data[key] = value
-                print(f"✓ {key}: {value}")
+                if verbose:
+                    print(f"✓ {key}: {value}")
 
-    print(f"--- FERTIG! {len(data)} Einträge extrahiert. ---\n")
+    if verbose:
+        print(f"--- FERTIG! {len(data)} Einträge extrahiert. ---\n")
+
     return data
 
 
 if __name__ == '__main__':
     # Test-Aufruf
     country = "Deutschland"
-    ergebnis = fetch_infobox_data(country)
+    ergebnis = fetch_infobox_data(country, True)
     print(ergebnis)
