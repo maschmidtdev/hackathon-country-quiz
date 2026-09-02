@@ -6,7 +6,7 @@ import urllib.request
 import pygame
 
 
-def play_hymn(country: str, infobox_data: dict):
+def play_hymn(country: str, infobox_data: dict, debug = False):
   country_cap = country.title()
   print(f"\n🔍 [AUDIO] Suche Hymne strikt über die Infobox für '{country_cap}'...")
 
@@ -24,7 +24,8 @@ def play_hymn(country: str, infobox_data: dict):
     # 2. Suchanfragen basierend auf dem Infobox-Eintrag vorbereiten
     queries = []
     if anthem_name:
-      print(f"📖 [AUDIO] Infobox-Hymnenname gefunden: '{anthem_name}'")
+      if debug:
+        print(f"📖 [AUDIO] Infobox-Hymnenname gefunden: '{anthem_name}'")
       queries.append(anthem_name)  # Höchste Priorität: Der exakte Name aus der Infobox
 
     # Fallbacks, falls die Infobox leer ist
@@ -49,10 +50,12 @@ def play_hymn(country: str, infobox_data: dict):
         break
 
     if not file_title:
-      print("❌ [AUDIO] Keine Audiodatei zur Infobox-Hymne gefunden.")
+      if debug:
+        print("❌ [AUDIO] Keine Audiodatei zur Infobox-Hymne gefunden.")
       return
 
-    print(f"✅ [AUDIO] Ausgewählte Datei: {file_title}")
+    if debug:
+      print(f"✅ [AUDIO] Ausgewählte Datei: {file_title}")
 
     # 4. CDN-URL abrufen und abspielen
     info_url = f"https://commons.wikimedia.org/w/api.php?action=query&titles={urllib.parse.quote(file_title)}&prop=imageinfo&iiprop=url&format=json"
@@ -70,14 +73,16 @@ def play_hymn(country: str, infobox_data: dict):
     )
 
     if not audio_url:
-      print("❌ [AUDIO] Konnte die Download-URL nicht auflösen.")
+      if debug:
+        print("❌ [AUDIO] Konnte die Download-URL nicht auflösen.")
       return
 
     audio_url = audio_url.split("?")[0]
     if audio_url.startswith("//"):
       audio_url = "https:" + audio_url
 
-    print(f"📥 [AUDIO] Lade Audio von: {audio_url}")
+    if debug:
+      print(f"📥 [AUDIO] Lade Audio von: {audio_url}")
     audio_bytes = urllib.request.urlopen(
         urllib.request.Request(audio_url, headers={"User-Agent": "Mozilla/5.0"})
     ).read()

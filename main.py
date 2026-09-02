@@ -6,14 +6,13 @@ from helpers import (
     get_countries,
     get_country_from_user,
     get_difficulties,
+    get_info_difficulties,
     get_infobox_data,
     get_coordinates,
     get_distance,
     special_capitalize,
     display_lives
 )
-
-
 
 
 def play_game(difficulties, country, infobox_data) -> int:
@@ -41,11 +40,15 @@ def play_game(difficulties, country, infobox_data) -> int:
             print(f"{BRIGHT_CYAN}{special_capitalize(guess)}{BRIGHT_MAGENTA} war leider falsch!{RESET}")
             score -= 1
 
-            coordinates_country_to_guess = get_coordinates(country)
-            coordinates_user_guess = get_coordinates(guess)
-            if coordinates_country_to_guess != None and coordinates_user_guess != None:
-                distance = get_distance(coordinates_country_to_guess, coordinates_user_guess)
-                print(f"{BRIGHT_WHITE}Die Hauptstadt deines Tipps liegt ca. {BRIGHT_CYAN}{int(distance)}{BRIGHT_WHITE} km von der Haupstadt des gesuchten Landes entfernt.{RESET}\n")
+            try:
+                coordinates_country_to_guess = get_coordinates(special_capitalize(country))
+                coordinates_user_guess = get_coordinates(guess)
+
+                if coordinates_country_to_guess != None and coordinates_user_guess != None:
+                    distance = get_distance(coordinates_country_to_guess, coordinates_user_guess)
+                    print(f"{BRIGHT_WHITE}Die Hauptstadt deines Tipps liegt ca. {BRIGHT_CYAN}{int(distance)}{BRIGHT_WHITE} km von der Haupstadt des gesuchten Landes entfernt.{RESET}\n")
+            except:
+                print("(Exception: Distanz konnte nicht abgefragt werden)\n")
 
     return score
 
@@ -72,7 +75,8 @@ def game(lives, score = 0):
 
     # um zu Testen Frankreich nutzen , lass die nächste Zeile drin,
     # ansonsten  für zufällige Länder auskommentieren:
-    country = "bosnien und Herzegowina"
+    country = "Bosnien und Herzegowina"
+    country = "frankreich"
 
     infobox_data = get_infobox_data(special_capitalize(country))
 
