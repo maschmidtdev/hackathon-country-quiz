@@ -59,33 +59,33 @@ def high_score_screen():
         with open("highscore.txt", "r", encoding="utf-8") as file:
             high_scores = file.readlines()
 
-        if not high_scores:
-            print("Es gibt noch keine Highscores.")
-            return
+    except FileNotFoundError:
+        print("Es gibt noch keine Highscores.")
+        return
+
 
     # sort by highest score
-        high_scores.sort(
-            key=lambda line:int(line.strip().split(";")[1]),
-            reverse=True
+    high_scores.sort(
+        key=lambda line:int(line.strip().split(";")[1]),
+        reverse=True
     )
 
     # display name - score
-        for i in range(len(high_scores)):
-            match i:
-                case 0:
-                    rank_color = BRIGHT_YELLOW
-                case 1:
-                    rank_color = RESET
-                case 2:
-                    rank_color = BRONZE
-                case _:
-                    rank_color = BRIGHT_WHITE
+    for i in range(len(high_scores)):
+        match i:
+            case 0:
+                rank_color = BRIGHT_YELLOW
+            case 1:
+                rank_color = RESET
+            case 2:
+                rank_color = BRONZE
+            case _:
+                rank_color = BRIGHT_WHITE
 
-            name, score = high_scores[i].strip().split(";")
-            print(f"{i+1}. {rank_color}{name} - {score}{RESET}")
+        name, score = high_scores[i].strip().split(";")
+        print(f"{i+1}. {rank_color}{name} - {score}{RESET}")
 
-    except FileNotFoundError:
-        print("Es gibt noch keine Highscores.")
+
 
 def high_score_count_file(score):
     input_name_gamer = input("Bitte geben Sie Ihren Namen ein: ")
