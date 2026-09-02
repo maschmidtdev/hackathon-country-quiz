@@ -1,4 +1,4 @@
-MAX_LIVES = 2
+MAX_LIVES = 3
 
 info_difficulties = {
     "ignore": [

@@ -77,11 +77,11 @@ def high_score_screen():
             case 0:
                 rank_color = BRIGHT_YELLOW
             case 1:
-                rank_color = RESET
+                rank_color = BRIGHT_WHITE
             case 2:
                 rank_color = BRONZE
             case _:
-                rank_color = BRIGHT_WHITE
+                rank_color = RESET
 
         name, score = high_scores[i].strip().split(";")
         print(f"{i+1}. {rank_color}{name} - {score}{RESET}")
@@ -162,7 +162,7 @@ def main():
 
             function_menu_choice(enter_number_menu)
 
-            if enter_number_menu == 4:
+            if enter_number_menu == 5:
                 break
 
         except ValueError:
