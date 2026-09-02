@@ -1,26 +1,25 @@
-Spielprinzip
+Spielprinzip:
+Das Spiel ist ein interaktives Geografie-Quiz, bei dem du ein zufällig ausgewähltes Land
+anhand verschiedener Ländermerkmale erraten musst. Der Reiz liegt in der schrittweisen Enthüllung:
+Du startest mit sehr kniffligen, abstrakten Hinweisen und arbeitest dich zu immer offensichtlicheren Hinweisen vor.
 
-Das Spiel ist ein interaktives Geografie-Quiz, bei dem du ein zufällig ausgewähltes Land anhand verschiedener Ländermerkmale erraten musst. Der Reiz liegt in der schrittweisen Enthüllung: Du startest mit sehr kniffligen, abstrakten Hinweisen und arbeitest dich zu immer offensichtlicheren Hinweisen vor. 
+Ziel:
+Errate das richtige Land anhand von Ländermerkmalen mit so wenigen Hinweisen wie möglich,
+um die höchste Punktzahl zu erreichen.
 
-
-Ziel 
-
-Errate das richtige Land anhand von Ländermerkmalen mit so wenigen Hinweisen wie möglich, um die höchste Punktzahl zu erreichen. 
-
-Ablauf 
-
-Die App wählt zufällig das zu erratende Land aus. 
-Der erste Hinweis wird aufgedeckt. 
-Der Spieler versucht, das Land zu erraten. 
+Ablauf:
+Der Spieler erhält drei Leben ♥♥♥.
+Die App wählt zufällig das zu erratende Land aus.
+Der erste Hinweis wird aufgedeckt.
+Der Spieler versucht, das Land zu erraten.
 Ist das Land falsch, wird der nächste Hinweis aufgedeckt. 
-Sollte es keine Hinweise oder Versuche mehr geben, ist die Runde verloren und das gesuchte Land wird aufgelöst. 
+Sollte es keine Hinweise oder Versuche mehr geben, ist die Runde verloren und
+das gesuchte Land wird aufgelöst.
 
-Punktevergabe 
-
-Je früher das Land erraten wird, desto mehr Punkte erhält der Spieler. 
-Hinweis: 5 Punkte (Höchste Punktzahl) 
-Hinweis: 4 Punkte 
-Hinweis: 3 Punkte 
-Hinweis: 2 Punkte 
-Hinweis: 1 Punkt 
-Falsch / Keine Versuche mehr: 0 Punktedeutschland 
+Punktevergabe:
+Je früher das Land erraten wird, desto mehr Punkte erhält der Spieler.
+Bei jedem neuen Hinweis wird 1 Punkt abgezogen.
+Sind alle Hinweise für ein Land aufgebraucht, verliert der Spieler ein Leben ♥.
+Das Spiel läuft so lange weiter, wie Leben vorhanden sind.
+Die Punkte werden über alle erfolgreich erratenen Länder aufsummiert.
+Bei Game Over (0 Leben) landet der Gesamtwert in der Bestenliste.
