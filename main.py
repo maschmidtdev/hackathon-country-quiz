@@ -13,7 +13,6 @@ from helpers import (
 )
 
 
-
 def play_game(difficulties, country, infobox_data) -> int:
     score = len(difficulties)
     info_difficulties = get_info_difficulties()
@@ -46,20 +45,36 @@ def play_game(difficulties, country, infobox_data) -> int:
 
 def high_score_screen():
     # open high scores file
+    try:
+        with open("highscore.txt", "r", encoding="utf-8") as file:
+            high_scores = file.readlines()
+
+        if not high_scores:
+            print("Es gibt noch keine Highscores.")
+            return
 
     # sort by highest score
+        high_scores.sort(
+            key=lambda line:int(line.strip().split(";")[1]),
+            reverse=True
+    )
 
     # display name - score
-    pass
+        for line in high_scores:
+            name, score = line.strip().split(";")
+            print(f"{name} - {score}")
 
+    except FileNotFoundError:
+        print("Es gibt noch keine Highscores.")
 
 def high_score_count_file(score):
     input_name_gamer = input("Bitte geben Sie Ihren Namen ein:")
+
     with open("highscore.txt", "a", encoding="utf-8") as file:
         file.write(f"{input_name_gamer};{score}\n")
 
 
-def function_menu_choice(input_user_choice_menu, total_score):
+def function_menu_choice(input_user_choice_menu):
     if input_user_choice_menu == 1:
         with open("game_instructions.txt", "r", encoding="utf-8") as file:
             text_output = file.read()
@@ -69,7 +84,7 @@ def function_menu_choice(input_user_choice_menu, total_score):
         game(MAX_LIVES)
 
     elif input_user_choice_menu == 3:
-        high_score_screen(total_score)
+        high_score_screen()
 
     elif input_user_choice_menu == 4:
         print("Das Spiel wird beendet.")
