@@ -52,7 +52,8 @@ info_difficulties = {
         "National­hymne",
         "Währung"
         "Flagge",
-        "Fahne"
+        "Fahne",
+        "Emblem"
     ]
 }
 
