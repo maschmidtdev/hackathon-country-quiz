@@ -114,7 +114,7 @@ def game(lives, score = 0, cheat = False):
     difficulties = get_difficulties()
     country = str(random.choice(get_countries()))
     # for testing
-    #country = "deutschland"
+    country = "deutschland"
 
     # Pre-Fetching beim Spielstart
     preload_country_data(country)
