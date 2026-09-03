@@ -11,7 +11,8 @@ from helpers import (
     get_coordinates,
     get_distance,
     special_capitalize,
-    display_lives
+    display_lives,
+    preload_country_data
 )
 
 
@@ -55,7 +56,6 @@ def play_game(difficulties, country, infobox_data, cheat) -> int:
 
 
 def high_score_screen():
-    # open high scores file
     try:
         with open("highscore.txt", "r", encoding="utf-8") as file:
             high_scores = file.readlines()
@@ -64,14 +64,11 @@ def high_score_screen():
         print("Es gibt noch keine Highscores.")
         return
 
-
-    # sort by highest score
     high_scores.sort(
         key=lambda line:int(line.strip().split(";")[1]),
         reverse=True
     )
 
-    # display name - score
     for i in range(len(high_scores)):
         match i:
             case 0:
@@ -113,12 +110,14 @@ def function_menu_choice(input_user_choice_menu):
         print("Das Spiel wird beendet.")
 
 
-
 def game(lives, score = 0, cheat = False):
     difficulties = get_difficulties()
     country = str(random.choice(get_countries()))
     # for testing
-    country = "deutschland"
+    #country = "deutschland"
+
+    # Pre-Fetching beim Spielstart
+    preload_country_data(country)
 
     infobox_data = get_infobox_data(special_capitalize(country))
     new_score = play_game(difficulties, country, infobox_data, cheat)
@@ -142,7 +141,6 @@ def game(lives, score = 0, cheat = False):
 
 
 def main():
-
     with open("game_introduction.txt", "r", encoding="utf-8") as file:
         introduction = file.read()
         print(f"{BRIGHT_GREEN}\n- - - Verländer dich nicht! - - -{BRIGHT_WHITE}" )
@@ -164,7 +162,7 @@ def main():
             enter_number_menu = int(input("Ihre Auswahl: "))
 
             if enter_number_menu < 1 or enter_number_menu > 5:
-                print(f"{BRIGHT_YELLOW+BOLD}Ungültige Eingabe. Bitte geben Sie eine Zahl von 1 bis 4 ein.{RESET}")
+                print(f"{BRIGHT_YELLOW+BOLD}Ungültige Eingabe. Bitte geben Sie eine Zahl von 1 bis 5 ein.{RESET}")
                 continue
 
             function_menu_choice(enter_number_menu)
@@ -173,7 +171,7 @@ def main():
                 break
 
         except ValueError:
-            print(f"{BRIGHT_YELLOW+BOLD}Ungültige Eingabe. Bitte geben Sie eine Zahl von 1 bis 4 ein.{RESET}")
+            print(f"{BRIGHT_YELLOW+BOLD}Ungültige Eingabe. Bitte geben Sie eine Zahl von 1 bis 5 ein.{RESET}")
 
 
 if __name__ == '__main__':

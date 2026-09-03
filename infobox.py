@@ -22,6 +22,20 @@ def fetch_infobox_data(country, verbose = False):
         return {}
 
     data = {}
+
+    # --- FLAGGEN-EXTRAKTION ---
+    flag_img = infobox.find("img", alt=lambda a: a and "flagge" in a.lower())
+    if not flag_img:
+        # Fallback: Erstes Bild in der Infobox suchen
+        flag_img = infobox.find("img")
+
+    if flag_img and "src" in flag_img.attrs:
+        src = flag_img["src"]
+        if src.startswith("//"):
+            src = "https:" + src
+        data["Flagge"] = src
+        data["Fahne"] = src
+
     if verbose:
         print(f"\n--- STARTE EXTRACT VON: {url} ---")
     

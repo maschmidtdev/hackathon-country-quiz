@@ -10,10 +10,7 @@ info_difficulties = {
         "Unabhängigkeit",
         "Verfassung"
     ],
-    "maybe": [
-        "Flagge",
-        "Fahne"
-    ],
+    "maybe": [],
     "schwer": [
         "Wahlsprache",
         "Amtssprache",
@@ -54,6 +51,8 @@ info_difficulties = {
         "Hauptort",
         "National­hymne",
         "Währung"
+        "Flagge",
+        "Fahne"
     ]
 }
 

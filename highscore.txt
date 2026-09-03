@@ -1,0 +1,7 @@
+iran;0
+Thomas;30
+Thomas;72
+ö;0
+iran;0
+Mauretanien;2
+iran;0
