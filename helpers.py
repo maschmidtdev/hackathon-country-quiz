@@ -36,7 +36,7 @@ def get_infobox_data(country) -> dict:
 
 def preload_country_data(country):
     """Lädt Infobox und Koordinaten im Voraus geladen in den Cache."""
-    print(f"{BRIGHT_WHITE}Lade Spieldaten für {special_capitalize(country)}...{RESET}")
+    #print(f"{BRIGHT_WHITE}Lade Spieldaten für {special_capitalize(country)}...{RESET}")
     fetch_infobox_data(special_capitalize(country))
     get_coordinates(special_capitalize(country))
 
