@@ -43,23 +43,23 @@ info_difficulties = {
         "Einwohner"
     ],
     "leicht": [
-        #"Zeitzone",
-        #"Kfz-Kennzeichen",
-        #"Hauptstadt",
-        "Nationalhymne",
-        #"Regierungssitz",
-        #"Hauptort",
-        #"National­hymne",
-        #"Währung"
-        #"Flagge",
-        #"Fahne",
-        #"Emblem",
-        #"Siegel"
+        "Zeitzone",
+        "Kfz-Kennzeichen",
+        "Hauptstadt",
+        #"Nationalhymne",
+        "Regierungssitz",
+        "Hauptort",
+        "National­hymne",
+        "Währung"
+        "Flagge",
+        "Fahne",
+        "Emblem",
+        "Siegel"
     ]
 }
 
 difficulty_counts = {
-    "schwer": 0,
-    "mittel": 0,
-    "leicht": 1
+    "schwer": 2,
+    "mittel": 3,
+    "leicht": 2
 }
